@@ -1,56 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Gmail Assistant</title>
+    <title>Gmail Templates</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h3>Gmail Assistant</h3>
+            <h3>Gmail Templates</h3>
         </div>
 
         <div class="main-content">
-            <!-- Wizard Steps -->
-            <div class="wizard-step active" data-step="1">
-                <h4>Step 1: Select "To" Recipients</h4>
-                <div class="list-box" id="toList"></div>
-                <button class="add-new-btn" data-target="contact">+ Add New Contact</button>
+            <div class="list-box" id="templateList">
+                <!-- Templates will be dynamically inserted here -->
             </div>
-            <div class="wizard-step" data-step="2">
-                <h4>Step 2: Select "Cc" Recipients (Optional)</h4>
-                <div class="list-box" id="ccList"></div>
-                <button class="add-new-btn" data-target="contact">+ Add New Contact</button>
-            </div>
-            <div class="wizard-step" data-step="3">
-                <h4>Step 3: Select "Bcc" Recipients (Optional)</h4>
-                <div class="list-box" id="bccList"></div>
-                <button class="add-new-btn" data-target="contact">+ Add New Contact</button>
-            </div>
-            <div class="wizard-step" data-step="4">
-                <h4>Step 4: Select Email Template</h4>
-                <div class="list-box" id="templateList"></div>
-                <button class="add-new-btn" data-target="template">+ Add New Template</button>
-            </div>
+            <button class="add-new-btn" id="addNewTemplateBtn">+ Add New Template</button>
         </div>
 
-        <div class="navigation">
-            <button id="prevBtn" class="nav-btn" style="visibility: hidden;">Previous</button>
-            <div class="dots-container" id="dotsContainer"></div>
-            <button id="nextBtn" class="nav-btn">Next</button>
-            <button id="applyBtn" class="nav-btn" style="display: none;">Apply to Gmail</button>
-        </div>
-
+        <!-- Modal for adding a new template -->
         <div id="modal" class="modal-overlay">
             <div class="modal-content">
-                <div id="addContactForm" class="form-container">
-                    <h5>Add New Contact</h5>
-                    <span class="close-btn">&times;</span>
-                    <input type="text" id="contactName" placeholder="Contact Name">
-                    <input type="email" id="contactEmail" placeholder="Contact Email">
-                    <button id="saveContactBtn" class="save-btn">Save Contact</button>
-                </div>
-                <div id="addTemplateForm" class="form-container">
+                <div id="addTemplateForm" class="form-container active">
                     <h5>Add New Template</h5>
                     <span class="close-btn">&times;</span>
                     <input type="text" id="templateTitle" placeholder="Template Title">
@@ -61,6 +31,7 @@
             </div>
         </div>
         
+        <!-- Tooltip for hover previews -->
         <div id="templatePreview" class="tooltip"></div>
         <div class="watermark">Jonah Paulin</div>
     </div>

@@ -1,99 +1,97 @@
-/* --- APPLE UI REDESIGN --- */
+/* --- AESTHETIC UI REDESIGN: TRANSLUCENT & DARK --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* This makes the entire popup window transparent */
 html, body {
-    width: 380px;
-    height: 580px;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    width: 380px; height: 580px;
+    font-family: 'Inter', sans-serif;
     margin: 0;
-    background-color: #f6f6f7;
+    background: transparent;
     overflow: hidden;
 }
-.container { display: flex; flex-direction: column; height: 100%; box-sizing: border-box; }
+
+/* This is the visible "glass" container */
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    box-sizing: border-box;
+    background: rgba(20, 20, 22, 0.85); /* Dark, semi-transparent background */
+    backdrop-filter: blur(20px) saturate(180%);
+    border-radius: 14px; /* Rounded corners for the popup */
+}
 
 .header {
-    padding: 16px;
-    text-align: center;
-    border-bottom: 1px solid #e5e5e5;
+    padding: 16px; text-align: center;
     flex-shrink: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
-.header h3 { margin: 0; font-size: 16px; font-weight: 600; color: #1d1d1f; }
+.header h3 { margin: 0; font-size: 16px; font-weight: 600; color: #ffffff; }
 
 .main-content {
     flex-grow: 1;
     padding: 20px;
-    position: relative;
     display: flex;
-}
-
-/* --- FIX: THE MAGIC SLIDER LOGIC --- */
-.wizard-step {
-    display: none; /* Hide all steps by default */
-    width: 100%;
     flex-direction: column;
-}
-.wizard-step.active {
-    display: flex; /* ONLY show the active step */
-}
-.wizard-step h4 {
-    margin-top: 0; margin-bottom: 15px;
-    font-size: 22px; font-weight: 700; color: #1d1d1f;
 }
 
 .list-box {
     flex-grow: 1;
     overflow-y: auto;
-    border: 1px solid #dcdce1;
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 12px;
-    background-color: #ffffff;
     padding: 4px;
 }
-.list-item { display: flex; align-items: center; padding: 10px; border-bottom: 1px solid #f0f0f0; }
+
+.list-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.list-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
 .list-item:last-child { border-bottom: none; }
-.list-item input { margin-right: 12px; }
-.list-item label { flex-grow: 1; font-size: 15px; color: #333; }
-.list-item-no-data { text-align: center; color: #888; padding: 20px 0; }
+.list-item-label { flex-grow: 1; font-size: 15px; font-weight: 500; color: #e0e0e0; }
+.list-item-no-data { text-align: center; color: rgba(255, 255, 255, 0.5); padding: 20px 0; }
+
+.delete-btn {
+    background: none; border: none; cursor: pointer;
+    padding: 5px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    transition: background-color 0.2s ease;
+}
+.delete-btn:hover { background-color: rgba(255, 255, 255, 0.15); }
+.delete-btn svg { width:16px; height:16px; fill:#aaa; }
+
 
 .add-new-btn {
-    background-color: #e9e9eb; color: #007aff;
-    font-size: 13px; font-weight: 600;
-    padding: 8px 12px; border-radius: 8px;
-    margin-top: 15px; align-self: flex-start;
-    border: none; cursor: pointer;
+    background: #0A84FF; color: white;
+    font-size: 14px; font-weight: 600;
+    padding: 12px; border-radius: 8px;
+    margin-top: 20px; align-self: center;
+    width: 100%;
+    border: none; cursor: pointer; transition: background-color 0.2s ease;
 }
-.add-new-btn:hover { background-color: #dcdce1; }
+.add-new-btn:hover { background-color: #0070D9; }
 
-.navigation {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 16px 20px; border-top: 1px solid #e5e5e5;
-    flex-shrink: 0;
-}
-.nav-btn {
-    padding: 10px 20px; border-radius: 20px;
-    font-size: 15px; font-weight: 600;
-    border: none; cursor: pointer;
-}
-#prevBtn { background-color: #e9e9eb; color: #007aff; }
-#prevBtn:hover { background-color: #dcdce1; }
-#nextBtn, #applyBtn { background-color: #007aff; color: white; }
-#nextBtn:hover, #applyBtn:hover { background-color: #0056b3; }
-
-.dots-container { display: flex; gap: 8px; }
-.dot { width: 8px; height: 8px; background-color: #dcdce1; border-radius: 50%; }
-.dot.active { background-color: #007aff; }
-
-/* MODAL REDESIGN */
-.modal-overlay { display: none; position: fixed; z-index: 10; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.4); align-items: center; justify-content: center; }
+/* MODAL */
+.modal-overlay { display: none; position: fixed; z-index: 10; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); backdrop-filter: blur(5px); align-items: center; justify-content: center; }
 .modal-overlay.active { display: flex; }
-.modal-content { background-color: #ffffff; padding: 20px; border-radius: 14px; width: 90%; max-width: 340px; box-shadow: 0 8px 32px rgba(0,0,0,0.1); position: relative; }
+.modal-content { background-color: #2c2c2e; padding: 25px; border-radius: 14px; width: 90%; max-width: 340px; border: 1px solid rgba(255, 255, 255, 0.2); position: relative; }
 .close-btn { position: absolute; top: 12px; right: 15px; color: #a0a0a0; font-size: 24px; cursor: pointer; }
-.form-container { display: none; }
 .form-container.active { display: block; }
-.form-container h5 { margin: 0 0 15px 0; font-size: 17px; font-weight: 600; }
-.form-container input, .form-container textarea { width: 100%; padding: 12px; margin: 8px 0; box-sizing: border-box; border: 1px solid #dcdce1; border-radius: 8px; font-size: 14px; }
+.form-container h5 { margin: 0 0 15px 0; font-size: 18px; font-weight: 600; color: white; }
+.form-container input, .form-container textarea { width: 100%; padding: 12px; margin: 8px 0; box-sizing: border-box; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 8px; font-size: 14px; background-color: rgba(0, 0, 0, 0.2); color: white; }
+.form-container input::placeholder, .form-container textarea::placeholder { color: rgba(255, 255, 255, 0.5); }
 .form-container textarea { resize: vertical; min-height: 120px; }
-.save-btn { width: 100%; margin-top: 10px; padding: 12px; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; border: none; background-color: #007aff; color: white;}
+.save-btn { width: 100%; margin-top: 10px; padding: 12px; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; border: none; background-color: #0A84FF; color: white;}
 
-/* TOOLTIP & WATERMARK */
-.watermark { position: absolute; bottom: 5px; right: 10px; font-size: 10px; color: #000; opacity: 0.15; pointer-events: none; }
-.tooltip { display: none; position: absolute; background-color: rgba(0, 0, 0, 0.8); color: white; padding: 10px; border-radius: 8px; z-index: 100; width: 250px; font-size: 12px; white-space: pre-wrap; word-wrap: break-word; pointer-events: none; }
-.tooltip h5 { margin: 0 0 5px 0; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 5px; }
+/* TOOLTIPS & WATERMARK */
+.tooltip { display: none; position: absolute; background-color: rgba(0, 0, 0, 0.85); color: white; padding: 12px; border-radius: 8px; z-index: 100; width: 280px; font-size: 13px; white-space: pre-wrap; word-wrap: break-word; pointer-events: none; backdrop-filter: blur(5px); border: 1px solid rgba(255, 255, 255, 0.1); }
+.tooltip h5 { margin: 0 0 8px 0; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 8px; font-size: 14px; font-weight: 600; }
 .tooltip p { margin: 0; }
+.watermark { position: absolute; bottom: 5px; right: 10px; font-size: 10px; color: #fff; opacity: 0.2; pointer-events: none; }
