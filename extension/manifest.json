@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "Python-Powered Gmail Assistant",
+  "version": "1.0",
+  "description": "Quickly use contacts and templates in Gmail, powered by a local Python backend.",
+  "permissions": [
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://mail.google.com/",
+    "http://127.0.0.1:5000/*" 
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  }
+}
